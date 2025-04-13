@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday, Sayang! 🎉</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffe4ec, #ffd1f1);
+      overflow-x: hidden;
+    }
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 3em;
+      color: #ff4081;
+      text-align: center;
+      margin-top: 50px;
+      animation: fadeInDown 1s ease forwards;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .content-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 50px 5vw;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      width: 100%;
+      max-width: 1000px;
+      animation: slideInLeft 1.2s ease forwards;
+      padding: 10px;
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .polaroid {
+      background: white;
+      padding: 12px;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .polaroid:hover {
+      transform: scale(1.04);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+    .polaroid img {
+      width: 100%;
+      border-radius: 14px;
+      object-fit: cover;
+    }
+    .caption {
+      text-align: center;
+      font-size: 0.95em;
+      font-weight: 500;
+      color: #444;
+      margin-top: 10px;
+    }
+    .message {
+      max-width: 500px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      animation: fadeInUp 1.5s ease forwards;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .message h2 {
+      color: #ff5f95;
+      margin-bottom: 20px;
+    }
+    .message p {
+      font-size: 1.05em;
+      color: #333;
+      line-height: 1.7;
+    }
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 10;
+    }
+    @media (max-width: 768px) {
+      .content-wrapper {
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 5vw;
+      }
+      h1 {
+        font-size: 2.2em;
+        margin-top: 30px;
+      }
+      .message {
+        padding: 20px;
+        border-radius: 18px;
+      }
+      .caption {
+        font-size: 0.85em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas class="confetti"></canvas>
+  <h1>Happy Birthday, Sayang! 🎂</h1>
+  <div class="content-wrapper">
+    <div class="gallery">
+      <div class="polaroid">
+        <img src="1000033052.jpg" alt="Foto 1">
+        <div class="caption"></div>
+      </div>
+      <div class="polaroid">
+        <img src="1000029247.jpg" alt="Foto 2">
+        <div class="caption"></div>
+      </div>
+      <div class="polaroid">
+        <img src="1000046670.jpg" alt="Foto 3">
+        <div class="caption"></div>
+      </div>
+      <div class="polaroid">
+        <img src="1000046713.jpg" alt="Foto 4">
+        <div class="caption"></div>
+      </div>
+    </div>
+
+    <div class="message">
+      <h2>untuk kamu yang paling spesial hari ini 💌</h2>
+      <p>
+        selamat ulang tahun, Sayanggg<br>
+        semoga panjang umur, sehat selalu, diberikan rezeki yang berlimpah, makin pinter, aaminn<br>
+        akuu cumaa mau bilang makasih karena udah jadi bagian penting dari hidup akuu 😊<br>
+        akuu berharap semoga kamu bahagia selalu, impian kamu di tahun ini tercapai, dan sama akuu terus yaaa jangan sama yang lain hehe<br>
+        lovee youu birthday girl 🤍
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Confetti effect
+    const canvas = document.querySelector('.confetti');
+    const ctx = canvas.getContext('2d');
+    let pieces = [];
+    const colors = ['#ff69b4', '#ffd700', '#ffb6c1', '#87ceeb', '#ff8c00'];
+    const numPieces = 150;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < numPieces; i++) {
+      pieces.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        size: Math.random() * 8 + 2,
+        speed: Math.random() * 3 + 1,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        tilt: Math.random() * 10 - 5
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of pieces) {
+        ctx.beginPath();
+        ctx.fillStyle = p.color;
+        ctx.fillRect(p.x + p.tilt, p.y, p.size, p.size);
+        p.y += p.speed;
+        p.tilt += Math.random() * 0.5 - 0.25;
+        if (p.y > canvas.height) {
+          p.y = -p.size;
+          p.x = Math.random() * canvas.width;
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  </script>
+</body>
+</html>
